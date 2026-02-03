@@ -1,2 +1,26 @@
-# MediBlood
-Mediblood is afull-stack web application created from my own idea to support healthcare using technology. It provides 24/7 medicine ordering and blood request services with order tracking, offline support, and a single-page UI, built using HTML, CSS, JavaScript, and Node.js core modules.
+# MediBlood Delivery (Demo)
+
+This folder contains a **prototype** ordering UI for:
+- **Medicine delivery** (catalog → cart → checkout)
+- **Blood requests** (type + units + hospital)
+
+## Run
+
+From the project root:
+
+```bash
+node server.js
+```
+
+Then open:
+
+```text
+http://localhost:5173/mediblood/
+```
+
+## Notes (important)
+
+- This is a **demo**. Real medicine and blood distribution must follow local laws, prescriptions, licensed-provider rules,
+  matching/testing, cold-chain requirements, and privacy/security standards.
+- The admin list (`Admin` tab) works only from the same computer (localhost).
+

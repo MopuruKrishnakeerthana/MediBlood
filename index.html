@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MediBlood Delivery (Demo)</title>
+    <meta name="description" content="Demo ordering UI for medicine delivery and blood requests." />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="./index.html" data-nav="home" aria-label="MediBlood Home">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span class="brand-text">MediBlood</span>
+        <span class="brand-sub">Delivery</span>
+      </a>
+
+      <nav class="nav">
+        <button class="nav-link" type="button" data-nav="medicines">Medicines</button>
+        <button class="nav-link" type="button" data-nav="blood">Blood</button>
+        <button class="nav-link" type="button" data-nav="track">Track</button>
+        <button class="nav-link" type="button" data-nav="admin">Admin</button>
+      </nav>
+
+      <button class="cart-button" type="button" data-nav="medicines" aria-label="Open cart">
+        Cart
+        <span class="cart-pill" data-cart-count>0</span>
+      </button>
+    </header>
+
+    <div class="sys-banner" data-sys-banner hidden></div>
+
+    <main class="container">
+      <section class="view" data-view="home">
+        <div class="hero">
+          <div class="hero-card">
+            <p class="kicker">Prototype / Demo</p>
+            <h1>Order medicines and request blood — in one simple flow.</h1>
+            <p class="muted">
+              This is a product prototype. In the real world, medicine dispensing and blood distribution must follow local laws,
+              prescriptions, cold-chain rules, and licensed-provider workflows.
+            </p>
+            <div class="hero-actions">
+              <button class="primary" type="button" data-nav="medicines">Order Medicines</button>
+              <button class="secondary" type="button" data-nav="blood">Request Blood</button>
+              <button class="ghost" type="button" data-nav="track">Track Order</button>
+            </div>
+            <div class="notice">
+              <strong>Emergency:</strong> If you need urgent medical help, call your local emergency number immediately.
+            </div>
+          </div>
+          <div class="hero-card">
+            <h2>What this demo includes</h2>
+            <ul class="checklist">
+              <li>Medicine catalog → cart → checkout</li>
+              <li>Blood request form (type + units + hospital)</li>
+              <li>Order tracking by ID</li>
+              <li>Local-only admin order list</li>
+            </ul>
+            <p class="muted small">Tip: After checkout, you’ll get an Order ID you can paste into Track.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" data-view="medicines" hidden>
+        <div class="view-header">
+          <div>
+            <h2>Medicines</h2>
+            <p class="muted small">Demo catalog. Prices, stock, and requirements are placeholders.</p>
+          </div>
+          <div class="view-actions">
+            <button class="secondary" type="button" data-action="clear-cart">Clear cart</button>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h3>Catalog</h3>
+            <div class="products" data-products></div>
+          </div>
+
+          <div class="card">
+            <h3>Your cart</h3>
+            <div class="cart" data-cart></div>
+            <div class="cart-summary">
+              <div class="cart-row">
+                <span class="muted">Total</span>
+                <strong data-cart-total>₹0.00</strong>
+              </div>
+            </div>
+
+            <hr class="sep" />
+
+            <h3>Checkout</h3>
+            <form class="form" data-checkout-form>
+              <div class="form-row">
+                <label>
+                  Full name
+                  <input name="name" type="text" autocomplete="name" required maxlength="60" />
+                </label>
+                <label>
+                  Phone
+                  <input name="phone" type="tel" autocomplete="tel" required maxlength="32" />
+                </label>
+              </div>
+              <label>
+                Address
+                <input name="address" type="text" autocomplete="street-address" required maxlength="140" />
+              </label>
+              <label>
+                City
+                <input name="city" type="text" autocomplete="address-level2" required maxlength="60" />
+              </label>
+              <label>
+                Note (optional)
+                <textarea name="note" rows="3" maxlength="300" placeholder="Any delivery notes…"></textarea>
+              </label>
+
+              <button class="primary" type="submit">Place order</button>
+              <p class="muted small">
+                Some medicines require a prescription in real life. This demo does not validate prescriptions.
+              </p>
+              <div class="result" data-checkout-result hidden></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" data-view="blood" hidden>
+        <div class="view-header">
+          <div>
+            <h2>Blood request</h2>
+            <p class="muted small">
+              Demo request flow. Real blood supply requires licensed blood banks, testing, matching, and proper transport.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-1">
+          <div class="card">
+            <form class="form" data-blood-form>
+              <div class="form-row">
+                <label>
+                  Contact name
+                  <input name="name" type="text" autocomplete="name" required maxlength="60" />
+                </label>
+                <label>
+                  Phone
+                  <input name="phone" type="tel" autocomplete="tel" required maxlength="32" />
+                </label>
+              </div>
+
+              <div class="form-row">
+                <label>
+                  Blood type
+                  <select name="bloodType" required>
+                    <option value="" selected disabled>Select…</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                  </select>
+                </label>
+                <label>
+                  Units
+                  <input name="units" type="number" inputmode="numeric" min="1" max="10" value="1" required />
+                </label>
+              </div>
+
+              <div class="form-row">
+                <label>
+                  Patient name (optional)
+                  <input name="patientName" type="text" maxlength="80" />
+                </label>
+                <label>
+                  Urgency
+                  <select name="urgency">
+                    <option value="Routine" selected>Routine</option>
+                    <option value="Today">Today</option>
+                    <option value="Emergency">Emergency</option>
+                  </select>
+                </label>
+              </div>
+
+              <label>
+                Hospital / location (optional)
+                <input name="hospital" type="text" maxlength="80" placeholder="Hospital name or pickup location…" />
+              </label>
+
+              <label>
+                City (optional)
+                <input name="city" type="text" autocomplete="address-level2" maxlength="60" />
+              </label>
+
+              <label>
+                Note (optional)
+                <textarea name="note" rows="3" maxlength="300" placeholder="Any details for the blood bank…"></textarea>
+              </label>
+
+              <button class="primary" type="submit">Submit request</button>
+              <div class="notice">
+                <strong>Important:</strong> This demo does not guarantee availability. In emergencies, contact the nearest hospital
+                and emergency services.
+              </div>
+              <div class="result" data-blood-result hidden></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" data-view="track" hidden>
+        <div class="view-header">
+          <div>
+            <h2>Track your order</h2>
+            <p class="muted small">Paste an Order ID like <code>MB-…</code> to see its details.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-1">
+          <div class="card">
+            <form class="form" data-track-form>
+              <div class="form-row">
+                <label>
+                  Order ID
+                  <input name="orderId" type="text" required maxlength="60" placeholder="MB-XXXX-XXXXXX" />
+                </label>
+                <label class="label-hidden">
+                  Track
+                  <button class="primary" type="submit">Track</button>
+                </label>
+              </div>
+              <div class="result" data-track-result hidden></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" data-view="admin" hidden>
+        <div class="view-header">
+          <div>
+            <h2>Admin (local demo)</h2>
+            <p class="muted small">
+              Lists recent orders. For safety this works only from the same computer (localhost).
+            </p>
+          </div>
+          <div class="view-actions">
+            <button class="secondary" type="button" data-action="refresh-admin">Refresh</button>
+          </div>
+        </div>
+
+        <div class="grid grid-1">
+          <div class="card">
+            <div class="result" data-admin-result hidden></div>
+            <div class="table-wrap" data-admin-table></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span class="muted small">MediBlood Delivery — demo UI built for your idea.</span>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
